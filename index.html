@@ -136,35 +136,59 @@
     <a href="team.html">Team</a>
   </nav>
   <h1>Scuderia Littel</h1>
-  <div class="slideshow" id="slideshow">
-    <img src="IMG_3279.jpeg" alt="Karting photo 1" class="active" />
-    <img src="IMG_3281.jpeg" alt="Karting photo 2" />
-    <img src="IMG_3282.jpeg" alt="Karting photo 3" />
-    <img src="IMG_3284.jpeg" alt="Karting photo 4" />
-    <img src="IMG_3287.jpeg" alt="Karting photo 5" />
-  </div>
-  <div class="dots" id="dots">
-    <div class="dot active"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
+  <div class="slideshow" id="slideshow"></div>
+  <div class="dots" id="dots"></div>
 
   <script>
-    const images = document.querySelectorAll('.slideshow img');
-    const dots = document.querySelectorAll('.dot');
+    const allImages = [
+      'gallery-image-1.jpeg',
+      'gallery-image-3.jpeg',
+      'gallery-image-4.jpeg',
+      'gallery-image-5.jpg',
+      'gallery-image-6.jpg',
+      'gallery-image-7.jpg',
+      'gallery-image-8.jpg',
+      'gallery-image-9.jpg',
+      'gallery-image-10.jpg',
+    ];
+
+    // Shuffle the rest
+    for (let i = allImages.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [allImages[i], allImages[j]] = [allImages[j], allImages[i]];
+    }
+
+    // gallery-image-2 always first
+    const images = ['gallery-image-2.jpeg', ...allImages];
+
+    const slideshow = document.getElementById('slideshow');
+    const dotsContainer = document.getElementById('dots');
+
+    images.forEach((src, i) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `Karting photo ${i + 1}`;
+      if (i === 0) img.classList.add('active');
+      slideshow.appendChild(img);
+
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    const imgEls = slideshow.querySelectorAll('img');
+    const dotEls = dotsContainer.querySelectorAll('.dot');
     let current = 0;
 
     function goTo(index) {
-      images[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      current = index % images.length;
-      images[current].classList.add('active');
-      dots[current].classList.add('active');
+      imgEls[current].classList.remove('active');
+      dotEls[current].classList.remove('active');
+      current = index % imgEls.length;
+      imgEls[current].classList.add('active');
+      dotEls[current].classList.add('active');
     }
-
-    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
 
     setInterval(() => goTo(current + 1), 3000);
   </script>
