@@ -327,5 +327,12 @@
     </div>
   </div>
 
+  <script>
+    const lines = document.querySelector('.lines');
+    window.addEventListener('scroll', () => {
+      const opacity = Math.max(0, 1 - window.scrollY / 150);
+      lines.style.opacity = opacity;
+    });
+  </script>
 </body>
 </html>
