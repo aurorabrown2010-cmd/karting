@@ -40,6 +40,27 @@
       box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
     }
 
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #1a1a1a;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
     .photo-container img {
       width: 100%;
       height: auto;
@@ -48,6 +69,10 @@
   </style>
 </head>
 <body>
+  <nav>
+    <a href="https://instagram.com/aurora.got.aura2" target="_blank">About Me</a>
+    <a href="https://gfckarting.com" target="_blank">Store</a>
+  </nav>
   <h1>Karting by Aurora</h1>
   <div class="photo-container">
     <img src="IMG_3279.jpeg" alt="Karting by Aurora" />
