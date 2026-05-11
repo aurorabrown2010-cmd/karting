@@ -107,32 +107,7 @@
       text-decoration: underline;
     }
 
-    .lang-wrapper {
-      position: fixed;
-      top: 16px;
-      right: 24px;
-      z-index: 100;
-    }
-
-    .lang-select {
-      font-family: 'Michroma', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      padding: 6px 10px;
-      cursor: pointer;
-      color: #1a1a1a;
-    }
-
-    .lang-select:focus {
-      outline: none;
-      border-color: #1a1a1a;
-    }
-
-    .lines {
+.lines {
       position: fixed;
       top: 0;
       left: 0;
@@ -149,17 +124,7 @@
   </style>
 </head>
 <body>
-  <div class="lang-wrapper">
-    <select class="lang-select" onchange="translatePage(this.value)">
-      <option value="" disabled selected>Language</option>
-      <option value="en">🇺🇸 English</option>
-      <option value="es">🇪🇸 Español</option>
-      <option value="fr">🇫🇷 Français</option>
-      <option value="it">🇮🇹 Italiano</option>
-    </select>
-  </div>
-
-  <svg class="lines" viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+<svg class="lines" viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <!-- Gold racing lines from bottom-right -->
     <path d="M1440,900 Q900,600 400,700 T0,400" stroke="#d4a017" stroke-width="5" fill="none" opacity="0.6"/>
     <path d="M1440,900 Q1000,500 600,400 T0,100" stroke="#d4a017" stroke-width="3" fill="none" opacity="0.4"/>
@@ -364,14 +329,6 @@
       lines.style.opacity = opacity;
     });
 
-    function translatePage(lang) {
-      if (lang === 'en') {
-        window.location.href = window.location.href.split('?')[0];
-      } else {
-        const url = encodeURIComponent(window.location.href.split('?')[0]);
-        window.location.href = `https://translate.google.com/translate?sl=en&tl=${lang}&u=${url}`;
-      }
-    }
   </script>
 </body>
 </html>
