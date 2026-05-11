@@ -107,6 +107,31 @@
       text-decoration: underline;
     }
 
+    .lang-wrapper {
+      position: fixed;
+      top: 16px;
+      right: 24px;
+      z-index: 100;
+    }
+
+    .lang-select {
+      font-family: 'Michroma', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      color: #1a1a1a;
+    }
+
+    .lang-select:focus {
+      outline: none;
+      border-color: #1a1a1a;
+    }
+
     .lines {
       position: fixed;
       top: 0;
@@ -124,6 +149,17 @@
   </style>
 </head>
 <body>
+  <div class="lang-wrapper">
+    <select class="lang-select" onchange="translatePage(this.value)">
+      <option value="en">🇺🇸</option>
+      <option value="es">🇪🇸</option>
+      <option value="fr">🇫🇷</option>
+      <option value="it">🇮🇹</option>
+    </select>
+  </div>
+
+  <div id="google_translate_element" style="display:none"></div>
+
   <svg class="lines" viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <!-- Gold racing lines from bottom-right -->
     <path d="M1440,900 Q900,600 400,700 T0,400" stroke="#d4a017" stroke-width="5" fill="none" opacity="0.6"/>
@@ -328,6 +364,19 @@
       const opacity = Math.max(0, 1 - window.scrollY / 150);
       lines.style.opacity = opacity;
     });
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+    }
+
+    function translatePage(lang) {
+      const select = document.querySelector('.goog-te-combo');
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event('change'));
+      }
+    }
   </script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
