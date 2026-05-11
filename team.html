@@ -159,8 +159,6 @@
     </select>
   </div>
 
-  <div id="google_translate_element" style="display:none"></div>
-
   <svg class="lines" viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
     <!-- Gold racing lines from bottom-right -->
     <path d="M1440,900 Q900,600 400,700 T0,400" stroke="#d4a017" stroke-width="5" fill="none" opacity="0.6"/>
@@ -366,18 +364,14 @@
       lines.style.opacity = opacity;
     });
 
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
-    }
-
     function translatePage(lang) {
-      const select = document.querySelector('.goog-te-combo');
-      if (select) {
-        select.value = lang;
-        select.dispatchEvent(new Event('change'));
+      if (lang === 'en') {
+        window.location.href = window.location.href.split('?')[0];
+      } else {
+        const url = encodeURIComponent(window.location.href.split('?')[0]);
+        window.location.href = `https://translate.google.com/translate?sl=en&tl=${lang}&u=${url}`;
       }
     }
   </script>
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
